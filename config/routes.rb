@@ -4,14 +4,15 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   resources :users, only: [:create, :show, :index]
-
-  post '/users',         to: 'users#create'
+  resources :products, only: [:create, :show, :index, :destroy]
+  post '/signup',         to: 'users#create'
   get '/users/:user_id', to: 'users#show'
   get '/users',          to: 'users#index'
 
   post '/login',    to: 'sessions#create'
-  post '/logout',   to: 'sessions#destroy'
-  get '/logged_in', to: 'sessions#is_logged_in?'
+  post '/add-to-cart', to: 'products#add_to_cart'
 
+  get '/logged_in', to: 'sessions#is_logged_in?'
+  delete '/logout',   to: 'sessions#destroy'
 
 end
