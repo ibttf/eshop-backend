@@ -12,8 +12,9 @@ class ProductsController < ApplicationController
     end
 
     def add_to_cart
-        cartItems=Cart.where(["user_id = ? and product_id = ?", current_user.id, params[:id]])
+
         if logged_in? && current_user
+            cartItems=Cart.where(["user_id = ? and product_id = ?", current_user.id, params[:id]])
             #if the product already exists in your cart, then you just add 1 to it.
             # if the product doesn't exist, then you create it.
             if cartItems.length>0
@@ -31,6 +32,25 @@ class ProductsController < ApplicationController
             render json: {error: "Must be logged in to add to cart"}, status: 401
         end
     end
+
+    def change_cart_quantity
+        cartItems=Cart.where(["user_id = ? and product_id = ?", current_user.id, params[:id]])
+        cartItems.each {|cartItem| cartItem.update(quantity: cartItem.quantity + params[:amount_to_change])}
+        render json :cartItems, status: :ok
+    end
+
+    def add_review
+        product=Product.find(params[:id])
+        review=Review.new(rev: params[:rev], rating: params[:rating], username: params[:username])
+        if review.save 
+            #successfully saved review
+            render json: :review, status: :ok
+        else
+            #error in saving
+            render json: {error: "Error in saving review. Please try again later."}, status: 401
+        end
+    end
+
 
 end
 

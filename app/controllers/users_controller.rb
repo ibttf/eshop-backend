@@ -13,6 +13,11 @@ class UsersController < ApplicationController
          end
     end
 
+    def cart_items
+        puts current_user
+        render json: current_user.carts, status: :ok
+    end
+
     def show
         @user = User.find(params[:id])
             if @user
@@ -29,8 +34,6 @@ class UsersController < ApplicationController
         
         def create
             @user = User.new(user_params)
-            puts "hello =------------"
-            puts @user
                 if @user.save
                     login!  
                     render json: {

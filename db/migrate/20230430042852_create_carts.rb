@@ -4,6 +4,7 @@ class CreateCarts < ActiveRecord::Migration[7.0]
       t.belongs_to :product
       t.belongs_to :user
       t.integer :quantity, default: 1
+
       t.timestamps
     end
   end
