@@ -6,7 +6,7 @@ class CreateProducts < ActiveRecord::Migration[7.0]
       t.string :image
       t.string :category
       t.float :price
-
+      t.integer :rating, default: 0
       t.timestamps
     end
   end

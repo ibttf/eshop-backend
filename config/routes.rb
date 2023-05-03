@@ -14,6 +14,9 @@ Rails.application.routes.draw do
   post '/add-to-cart', to: 'products#add_to_cart'
   post '/change-cart-quantity', to: 'products#change_cart_quantity'
   post '/add-review', to: 'products#add_review'
+  post '/get-reviews', to: 'products#get_reviews'
+  post '/get-average-review', to: 'products#get_average_review'
+
   get '/logged_in', to: 'sessions#is_logged_in?'
   delete '/logout',   to: 'sessions#destroy'
 

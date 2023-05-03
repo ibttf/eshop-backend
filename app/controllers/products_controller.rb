@@ -41,9 +41,10 @@ class ProductsController < ApplicationController
 
     def add_review
         product=Product.find(params[:id])
-        review=Review.new(rev: params[:rev], rating: params[:rating], username: params[:username])
+        review=Review.create(rev: params[:rev], rating: params[:rating], username: params[:username], product_id: params[:id])
         if review.save 
             #successfully saved review
+            #should update the review
             render json: :review, status: :ok
         else
             #error in saving
@@ -51,6 +52,19 @@ class ProductsController < ApplicationController
         end
     end
 
+    def get_reviews
+        product=Product.find(params[:id])
+        render json: product.reviews, status: :ok
+
+    end
+
+    def get_average_review
+        product=Product.find(params[:id])
+        total=0
+        totalRev=0
+        product.reviews.each {|review| totalRev+=review.rev; total+=1}
+        puts totalRev/total.to_i
+    end
 
 end
 
