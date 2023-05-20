@@ -6,7 +6,7 @@
 # Read more: https://github.com/cyu/rack-cors
 Rails.application.config.middleware.insert_before 0, Rack::Cors do 
     allow do
-      origins '*' # to change in actual production
+      origins 'http://localhost:3000' # to change in actual production
     
       resource '*',
         headers: :any,
