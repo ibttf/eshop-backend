@@ -31,12 +31,20 @@ module Wms
     # config.api_only = false
 
 # BELOW IS WHAT I JUST ADDED OFF DOCS TO TRY AND MAKE SESSIONS LOGIN WORK
+  config.middleware.insert_before 0, Rack::Cors do
+    allow do
+      origins '*'
+      resource '*', headers: :any, methods: [:get, :post, :options]
+    end
+  end
     config.session_store :cookie_store, key: '_interslice_session'
 
     # Required for all session management (regardless of session_store)
     config.middleware.use ActionDispatch::Cookies
     
     config.middleware.use config.session_store, config.session_options
+
+
 
   end
 end
