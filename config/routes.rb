@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get '/users/:user_id', to: 'users#show'
   get '/users',          to: 'users#index'
   get '/cart-items', to: 'users#cart_items'
+  get 'products', to: 'products#index'
+
 
   post '/login',    to: 'sessions#create'
   post '/add-to-cart', to: 'products#add_to_cart'
