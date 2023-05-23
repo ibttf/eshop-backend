@@ -75,7 +75,7 @@ Rails.application.configure do
   #BELOW CODE DOES NOT WORK
   # config.action_controller.session = { :domain => ".netlify.app" }
   # ^^^^^
-
+  config.action_dispatch.cookies_same_site_protection = :none
 
 
   # Use a different logger for distributed setups.
