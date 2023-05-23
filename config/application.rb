@@ -39,17 +39,24 @@ module Wms
   end
 
 
-  config.session_store :cookie_store, key: '_interslice_session'
+  # config.session_store :cookie_store, key: '_interslice_session'
 
-  config.middleware.use ActionDispatch::Cookies
+  # config.middleware.use ActionDispatch::Cookies
   
-  config.middleware.use config.session_store, config.session_options
+  # config.middleware.use config.session_store, config.session_options
 
-  #newly adding cookiestore
-  config.middleware.use ActionDispatch::Cookies
-  config.middleware.use ActionDispatch::Session::CookieStore
-  config.middleware.insert_after(ActionDispatch::Cookies, ActionDispatch::Session::CookieStore)
 
+
+    #BELOW IS WHAT I'M ADDING OFF A FORMER PROJECT TO SEE IF ANYTHING CHANGES
+   config.api_only = true
+
+   # Adding back cookies and session middleware
+   config.middleware.use ActionDispatch::Cookies
+   config.middleware.use ActionDispatch::Session::CookieStore
+
+   # Use SameSite=Strict for all cookies to help protect against CSRF
+   config.action_dispatch.cookies_same_site_protection = :strict
+ end
 
   end
 end
